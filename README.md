@@ -51,6 +51,15 @@ class Kernel extends HttpKernel {
 ```
 
 ## config/api.php
+
+You can publish the default config file, which sets requests from localhost to unlimited:
+
+```
+php artisan vendor:publish --provider="Paneidos\AdvancedThrottle\AdvancedThrottleServiceProvider" --tag=config
+```
+
+Or you can create your config manually:
+
 ```php
 <?php
 
