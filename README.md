@@ -44,6 +44,7 @@ class Kernel extends HttpKernel {
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         // 'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         // Replace the original line (commented out above) with the one below
+        // (only needed if you don't use the service provider)
         'throttle' => \Paneidos\AdvancedThrottle\AdvancedRequestThrottle::class,
     ];
 }
@@ -57,6 +58,8 @@ return [
     'throttle' => [
         '127.0.0.1' => ['limit' => 300, 'per' => 2], // 300 requests per 2 minutes
         '::2/64' => ['limit' => -1], // unlimited
+        // Starting with Laravel 5.6, you can make limit a propery name of the user:
+        '192.168.0.0/16' => ['limit' => 'rate_limit'],
     ],
 ];
 ```
