@@ -15,7 +15,8 @@ class AdvancedRequestThrottle extends ThrottleRequests
      */
     protected $config;
 
-    public function __construct(RateLimiter $limiter, Repository $config) {
+    public function __construct(RateLimiter $limiter, Repository $config)
+    {
         parent::__construct($limiter);
         $this->config = $config;
     }
@@ -33,7 +34,7 @@ class AdvancedRequestThrottle extends ThrottleRequests
     public function handle($request, Closure $next, $maxAttempts = 60, $decayMinutes = 1, $config = null)
     {
         if ($config && ($limits = $this->config->get($config))) {
-            foreach($limits as $ip => $limit) {
+            foreach ($limits as $ip => $limit) {
                 if (IpUtils::checkIp($request->getClientIp(), $ip)) {
                     if (isset($limit['limit']) && $limit['limit'] < 0) {
                         return $next($request);

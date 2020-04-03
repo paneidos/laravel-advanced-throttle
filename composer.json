@@ -1,11 +1,7 @@
 {
     "name": "paneidos/laravel-advanced-throttle",
     "description": "Advanced rate limiting middleware for Laravel 5.2 and higher",
-    "require": {
-        "illuminate/cache": "^5.2,<6.0",
-        "illuminate/routing": "^5.2,<6.0",
-        "illuminate/support": "^5.2,<6.0"
-    },
+    "type": "library",
     "license": "MIT",
     "authors": [
         {
@@ -13,13 +9,23 @@
             "email": "serninpc@paneidos.net"
         }
     ],
+    "require": {
+        "php": ">= 7.1",
+        "illuminate/cache": "^5.2,<6.0",
+        "illuminate/routing": "^5.2,<6.0",
+        "illuminate/support": "^5.2,<6.0"
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^3"
+    },
     "autoload": {
         "psr-4": {
             "Paneidos\\AdvancedThrottle\\": "src/"
         }
     },
-    "config": {
-        "sort-packages": true
+    "scripts": {
+        "check-style": "phpcs -p src/",
+        "fix-style": "phpcbf -p src/"
     },
     "extra": {
         "laravel": {
@@ -27,5 +33,10 @@
                 "Paneidos\\AdvancedThrottle\\AdvancedThrottleServiceProvider"
             ]
         }
-    }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
