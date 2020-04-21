@@ -36,14 +36,16 @@ class AdvancedRequestThrottle extends ThrottleRequests
         if ($config && ($limits = $this->config->get($config))) {
             foreach ($limits as $ip => $limit) {
                 if (IpUtils::checkIp($request->getClientIp(), $ip)) {
-                    if (isset($limit['limit']) && $limit['limit'] < 0) {
+                    if (is_numeric($limit)) {
+                        $maxAttempts = $limit;
+                    } elseif (is_array($limit)) {
+                        $maxAttempts = $limit['limit'] ?? $maxAttempts;
+                        if (isset($limit['per'])) {
+                            $decayMinutes = $limit['per'];
+                        }
+                    }
+                    if ($maxAttempts < 0) {
                         return $next($request);
-                    }
-                    if (isset($limit['limit'])) {
-                        $maxAttempts = $limit['limit'];
-                    }
-                    if (isset($limit['per'])) {
-                        $decayMinutes = $limit['per'];
                     }
                     break;
                 }
