@@ -32,7 +32,7 @@ class AdvancedRequestThrottle extends ThrottleRequests
      * @return mixed
      */
     public function handle($request, Closure $next, $maxAttempts = 60, $decayMinutes = 1, $config = null)
-    {
+    {;
         if ($config && ($limits = $this->config->get($config))) {
             foreach ($limits as $ip => $limit) {
                 if (IpUtils::checkIp($request->getClientIp(), $ip)) {

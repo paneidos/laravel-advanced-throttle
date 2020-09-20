@@ -16,6 +16,9 @@
         "illuminate/support": "^5.2|^6|^7"
     },
     "require-dev": {
+        "illuminate/config": "^5.2|^6|^7",
+        "mockery/mockery": "^1.4",
+        "phpunit/phpunit": "~9.0",
         "squizlabs/php_codesniffer": "^3"
     },
     "autoload": {
@@ -23,7 +26,13 @@
             "Paneidos\\AdvancedThrottle\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Paneidos\\AdvancedThrottle\\Tests\\": "tests/"
+        }
+    },
     "scripts": {
+        "test": "phpunit",
         "check-style": "phpcs -p src/",
         "fix-style": "phpcbf -p src/"
     },
